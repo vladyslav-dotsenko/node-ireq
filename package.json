@@ -1,0 +1,23 @@
+{
+  "name": "ireq",
+  "version": "1.0.0",
+  "description": "NodeJS require improovement",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Karponter/node-ireq.git"
+  },
+  "keywords": [
+    "module",
+    "require"
+  ],
+  "author": "Karponter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Karponter/node-ireq/issues"
+  },
+  "homepage": "https://github.com/Karponter/node-ireq#readme"
+}
