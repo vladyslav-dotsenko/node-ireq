@@ -1,6 +1,6 @@
 # node-ireq
 NodeJS require improovement
-Module adds requirement biding, relarive to project's main-file (`main` key in `package.json`).
+Module adds requirement biding, relarive to defined project-root path.
 Made to remove `'./../../../'` hell in deep-nested modules.
 
 ## Installation
@@ -11,9 +11,11 @@ $ nmp install ireq --save
 
 ## Usage
 Once module was required, it creates global variable `ireq`.
+You must initiate module first to define project-root.
 ```
 require('ireq');
 ireq('foo.json');
+ireq.init(__dirname);
 ```
 Still, you can use it as you always do...
 ```
@@ -34,5 +36,5 @@ ireq.unbind('foo');
 ```
 Use functional syntax if you prefer
 ```
-const bar = ireq('foo', 'bar.json');
+const bar = ireq.get('foo', 'bar.json');
 ```
