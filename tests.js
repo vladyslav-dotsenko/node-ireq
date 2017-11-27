@@ -23,7 +23,7 @@ describe('ireq', () => {
   });
 
   it('should not allow binding before initiated', () => {
-    const tryToBind = () => ireq.bind('one', '/testable');
+    const tryToBind = () => ireq.bindModule('one', '/testable');
     expect(new errors.NoBindBeforeInitError()).to.be.instanceof(Error);
     expect(tryToBind).to.throw(errors.NoBindBeforeInitError);
     expect(ireq.one).to.not.exist;
@@ -31,7 +31,7 @@ describe('ireq', () => {
 
   it('should bind after initiated', () => {
     ireq.init(__dirname);
-    const tryToBind = () => ireq.bind('one', '/testable');
+    const tryToBind = () => ireq.bindModule('one', '/testable');
     expect(tryToBind).to.not.throw();
     expect(ireq.one).to.be.an.instanceof(Function);
   });
@@ -52,7 +52,7 @@ describe('ireq', () => {
     });
 
     it('should allow multiple bindings', () => {
-      expect(() => ireq.bind('two', '/testable')).to.not.throw();
+      expect(() => ireq.bindModule('two', '/testable')).to.not.throw();
       expect(ireq.two).to.be.an.instanceof(Function);
       expect(ireq.two()).to.be.true;
     });
@@ -64,7 +64,7 @@ describe('ireq', () => {
 
     it('should allow nested bindings', () => {
       expect(ireq.one.bind).to.be.an.instanceof(Function);
-      ireq.one.bind('two', '/nested');
+      ireq.one.bindModule('two', '/nested');
       expect(ireq.one.two).to.be.an.instanceof(Function);
       expect(ireq.one.two()).to.be.equal('OK');
     });
