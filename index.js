@@ -1,6 +1,22 @@
 'use strict';
 
 const E = require('./errors');
+const fs = require('fs');
+
+const JSExtensionRegExp = /\.(json|js)$/i;
+
+const lookupCache = {};
+const lookupFolder = (dirPath) => {
+  if (lookupCache[dirPath])
+    return lookupCache[dirPath];
+  const modules = {};
+  fs.readdirSync(dirPath).forEach(function(file) {
+    const modulename = file.replace(JSExtensionRegExp, '');
+    modules[modulename] = require(dirPath + modulename);
+  });
+  lookupCache[dirPath] = modules;
+  return modules;
+};
 
 function _ireq_init(path) {
   this._root = path;
@@ -35,7 +51,15 @@ function _ireq_get(module, file = '') {
   const middlePath = this._path_mapping[module];
   if (!middlePath)
     throw new Error(`iReq: Can't get module "${module}", no binding found`);
-  return require(`${this._root}${middlePath}/${file}`);
+  const path = `${this._root}${middlePath}/${file}`;
+  if (
+    fs.existsSync(path) &&
+    fs.lstatSync(path).isDirectory() &&
+    !fs.existsSync(path + '/index.js')
+  ) {
+    return lookupFolder(path);
+  }
+  return require(path);
 };
 
 const _ireq = (module) => {

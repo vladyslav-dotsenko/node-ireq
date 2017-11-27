@@ -79,7 +79,7 @@ describe('ireq', () => {
   describe('folder lookup', () => {
 
     it('should lookup files in folder if no index.js found', () => {
-      ireq.one.bind('noIndexBind', '/nested-no-index');
+      ireq.one.bindModule('noIndexBind', '/nested-no-index');
       const nestedNoIndex = ireq.one.noIndexBind();
       expect(nestedNoIndex).to.have.all.keys('one', 'two');
       expect(nestedNoIndex.one).to.be.equal(1);
@@ -87,8 +87,8 @@ describe('ireq', () => {
     });
 
     it('should import by filename as usual', () => {
-      expect(ireq.one.noIndexBind('./one')).to.be.exactly(1);
-      expect(ireq.one('./nested-no-index/one')).to.be.exactly(1);
+      expect(ireq.one.noIndexBind('./one')).to.be.equal(1);
+      expect(ireq.one('./nested-no-index/one')).to.be.equal(1);
     });
 
   });
