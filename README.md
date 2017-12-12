@@ -81,11 +81,11 @@ const { stringUtils, numberUtils } = ireq.utils('');
 
 ## Changelog
 
-*v.1.0* -- Main-module relative binding and importing.
+**v.1.0** -- Main-module relative binding and importing.
 
-*v.1.1* -- Root path binding and initializing.
+**v.1.1** -- Root path binding and initializing.
 
-*v.2.0* -- Automated index lookup for binded folder, and nested bindings.
+**v.2.0** -- Automated index lookup for binded folder, and nested bindings.
 
 ## License
 
